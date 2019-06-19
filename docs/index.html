@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title></title>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="2d.js"></script>
+
+<script type="text/javascript">
+var timerId = null;
+var intertime = 16;
+var Tex;
+var Map;
+var ImageCount;
+
+function load() {
+  ImageCount = 0;
+  Tex = new Image();
+  Tex.onload = function(){ Init(); };
+  Tex.src = "pd.png";
+  Map = new Image();
+  Map.onload = function(){ Init(); };
+  Map.src = "map.png";
+}
+
+function Init() {
+  if(++ImageCount != 2)
+    return;
+  Js2dInit();
+  timerId = setInterval(Move, intertime);
+}
+
+function Move() {
+  PdMove();
+}
+
+window.addEventListener('load', load, false);
+</script>
+</head>
+<body>
+<canvas id="canvas0" width="320" height="224" style="border:1px solid black; width:320px; height:224px"></canvas>
+<table>
+<tr><td>ACCEL</td><td>X</td></tr>
+<tr><td>BRAKE</td><td>Z</td></tr>
+<tr><td>LEFT</td><td>←</td></tr>
+<tr><td>RIGHT</td><td>→</td></tr>
+</table>
+</body>
+</html>
